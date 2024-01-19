@@ -1,0 +1,16 @@
+{%extends 'commonContent.html' %} {% load static %} {% block contentViews%}
+
+<section>
+  <h2>Add new article</h2>
+
+  <form action="{% url 'add_article' %}" method="POST">
+    {% csrf_token %}
+    <table>
+      {{form.as_table}}
+    </table>
+
+    <input type="submit" value="Add Article" />
+  </form>
+</section>
+
+{% endblock%}

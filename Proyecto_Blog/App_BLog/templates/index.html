@@ -1,0 +1,15 @@
+{%extends 'commonContent.html' %} {% load static %} {% block contentViews%}
+
+<div class="container">
+  <h1>Aqui van los aticulos</h1>
+
+  {% if request.user.is_authenticated %}
+  <div class="text-center">
+    <img height="480px" src="{{url}}" />
+    <h1>Hola {{user.usersurname}}</h1>
+  </div>
+
+  {% endif %}
+</div>
+
+{% endblock %}

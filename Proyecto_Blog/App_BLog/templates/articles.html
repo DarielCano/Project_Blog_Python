@@ -1,0 +1,38 @@
+{%extends 'commonContent.html' %} {% load static %} {% block contentViews%}
+
+<div class="container">
+  <div class="section">
+    <h2>My Articles</h2>
+    <div class="cards">
+      {% if articles %} {% for article in articles %}
+      <div class="card">
+        <h2>{{article.title}}</h2>
+        <h3>{{article.subtitle}}</h3>
+
+        <p>Autor: {{article.author.username}}</p>
+        <p>Fecha de creación: {{article.create_at}}</p>
+
+        <div class="d-flex justify-between align-center">
+          <form method="DELETE" action="">
+            {% csrf_token%}
+            <button
+              class="btn btn-danger"
+              name="{{article.id}}"
+              value="{{article.id}}"
+            >
+              Delete
+            </button>
+          </form>
+        </div>
+        <a href="{% url 'article-detail' article.id %}">Details</a>
+      </div>
+
+      {% endfor %} {% else %}
+      <p>No hay información por mostrar aún 😟</p>
+
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock%}
