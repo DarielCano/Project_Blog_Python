@@ -1,15 +1,38 @@
 {%extends 'commonContent.html' %} {% load static %} {% block contentViews%}
 
 <div class="container">
-  <h1>Aqui van los aticulos</h1>
+  <h1>All Published Articles</h1>
 
-  {% if request.user.is_authenticated %}
-  <div class="text-center">
+  {% if all_articles %} {% for article in all_articles %}
+  <div class="card">
+    <h2>{{article.title}}</h2>
+    {% if article.image%}
+    <div class="bg-black"><img src="{{article.image.url}}" alt="" /></div>
+    {% endif%}
+    <div>
+      <h4>{{article.subtitle}}</h4>
+
+      <p>
+        <strong>Author:</strong> {{article.author.first_name}}
+        {{article.author.last_name}}
+      </p>
+      <p><strong>Created_at:</strong> {{article.create_at}}</p>
+
+      <a href="{% url 'article-detail' article.id %}">Details</a>
+    </div>
+
+    {% endfor %} {% else %}
+    <p>No hay información por mostrar aún 😟</p>
+
+    {% endif %}
+  </div>
+  <!--   {% if request.user.is_authenticated %}
+   <div class="text-center">
     <img height="480px" src="{{url}}" />
     <h1>Hola {{user.usersurname}}</h1>
-  </div>
+  </div> 
 
-  {% endif %}
+  {% endif %} -->
 </div>
 
 {% endblock %}

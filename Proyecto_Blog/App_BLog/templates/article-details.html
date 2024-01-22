@@ -7,7 +7,24 @@
   </head>
 
   <body>
-    <p>: {{article.title}}</p>
+    <div class="container">
+      <p></p>
+      <div class="d-flex flex-colunm justify-center align center w-75 m-auto">
+        <h2>{{article.title}}</h2>
+        <div class="bg-black"><img src="{{article.image.url}}" alt="" /></div>
+        <div>
+          <div>
+            <h3 class="pb-2">{{article.subtitle}}</h3>
+            <p>
+              <strong>Author: </strong>{{article.author.first_name}}
+              {{article.author.last_name}}
+            </p>
+            <p>{{article.description}}</p>
+          </div>
+          <h4>Created-at: {{article.create_at}}</h4>
+        </div>
+      </div>
+    </div>
 
     <a href="{% url 'articles' %}">Back</a>
   </body>

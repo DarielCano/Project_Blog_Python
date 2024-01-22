@@ -12,6 +12,12 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from django.conf.urls.static import static
+
+
+
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,7 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'App_BLog'
+    'App_BLog',
+    'crispy',
+   
 ]
 
 MIDDLEWARE = [
@@ -120,7 +128,7 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "static"
 ]
 
 # Default primary key field type
@@ -131,10 +139,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = "/app/login"
 
 
-MEDIA_URL = './media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 
 LOGIN_REDIRECT_URL = '/app/'
-LOGOUT_REDIRECT_URL = '/app/login'
+LOGOUT_REDIRECT_URL = '/app/'

@@ -1,3 +1,61 @@
-.background-color {
-    background-color: red;
+:root {
+    --main-color: #045AFC;
+    --tilte-color: #FFFFFF;
+    --second-color: #a8d8eb;
+    --second-color-opacity: rgba(2, 4, 9, 0.2);
+    --active-color: #E7E307;
+    --third-color: #F8E7F9;
+    --black-color: #000000;
+    --font-family-ppal: 'Raleway', sans-serif;
+    --font-family-sec: 'Montserrat', sans-serif;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 140rem;
+    font-size: 2rem;
+    line-height: 1.5;
+    background-image: radial-gradient(#fffdef, var(--second-color));
+    font-family: var(--font-family-sec);
+}
+
+h1 {
+    font-size: 3.2rem;
+}
+
+h2 {
+    font-size: 2.8rem;
+}
+
+h3 {
+    font-size: 2.3rem;
+    font-weight: bold;
+    margin: 1.8rem auto;
+}
+
+a {
+    text-decoration: none;
+    color: var(--tilte-color);
+    font-weight: bold;
+}
+
+li {
+    list-style-type: none;
 }

@@ -23,7 +23,8 @@ class UserRegistrationForm(UserCreationForm):
 
 class UserEditForm(UserCreationForm):
     username = forms.CharField()
-    usersurname = forms.CharField()
+    first_name= forms.CharField()
+    last_name = forms.CharField()
     email = forms.EmailField()
     password1 = forms.CharField(label = 'Contraseña',widget=forms.PasswordInput)
     password2 = forms.CharField(label = 'Repetir contraseña',widget=forms.PasswordInput)
@@ -31,7 +32,7 @@ class UserEditForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username','usersurname','email','password1','password2']
+        fields = ['username','first_name','last_name','email','password1','password2']
         
         
    
@@ -39,7 +40,7 @@ class UserEditForm(UserCreationForm):
 class ArticleForm(forms.ModelForm):
     class Meta:
         model= Article
-        fields = ["title",'subtitle','description']
+        fields = ["title",'subtitle','description', 'image']
         
         
 class AvatarForm(forms.Form):
