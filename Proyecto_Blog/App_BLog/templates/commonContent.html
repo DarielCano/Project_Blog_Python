@@ -14,11 +14,18 @@
     />
   </head>
   <body>
-    <header class="header">
-      <h1 class="w-100 text-center p-1 cursor-pointer">
-        <a href="/app">Articles<span class="f-bold">Land</span></a>
+    <header class="header" style="border-bottom: 2px solid black">
+      <h1 class="w-100 text-center p-3 cursor-pointer">
+        <a href="/app" class="text-black" style="text-decoration: none"
+          >Articles<span class="f-bold text-black" style="font-style: italic"
+            >Land</span
+          ></a
+        >
       </h1>
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <nav
+        class="navbar navbar-expand-lg bg-body-tertiary"
+        style="border-top: thin solid black"
+      >
         <div class="container-fluid">
           <button
             class="navbar-toggler"
@@ -34,25 +41,65 @@
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/app/articles"
-                  >My Articles</a
+                <a class="nav-link" style="font-size: 1.5rem" href="/app/"
+                  >All Articles</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/app/new-article">New Article</a>
+                <a
+                  class="nav-link"
+                  style="font-size: 1.5rem"
+                  aria-current="page"
+                  href="/app/articles"
+                  >My Articles</a
+                >
               </li>
+              {% if user.username != 'admin'%}
               <li class="nav-item">
-                <a class="nav-link" href="/app/aboutMe">About Me</a>
+                <a
+                  class="nav-link"
+                  style="font-size: 1.5rem"
+                  href="/app/new-article"
+                  >New Article</a
+                >
+              </li>
+
+              {% else%}
+              <li class="nav-item">
+                <a class="nav-link" style="font-size: 1.5rem" href="/admin"
+                  >Admin Panel</a
+                >
+              </li>
+              {% endif%}
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  style="font-size: 1.5rem"
+                  href="/app/aboutMe"
+                  >About Me</a
+                >
               </li>
             </ul>
             <span class="navbar-text">
               <div>
                 {% if user.is_authenticated %}
                 <div class="d-flex justify-center align-center">
-                  <a class="pt-1" href="{% url 'profile'%}">
-                    <strong>{{user.username}}</strong>
+                  <a
+                    class="user"
+                    style="text-decoration: none"
+                    href="{% url 'profile'%}"
+                  >
                     {% if url %}
-                    <img height="40px" src="{{url}}" alt="" />
+                    <div class="user-img">
+                      <img
+                        height="30rem"
+                        width="30rem"
+                        style="border-radius: 50%"
+                        src="{{url}}"
+                        alt=""
+                      />
+                    </div>
+
                     {% else %}
                     <img
                       height="40px"
@@ -60,18 +107,28 @@
                       alt=""
                     />
                     {% endif %}
+                    <strong>{{user.username}}</strong>
                   </a>
-                  <strong class="bold">|</strong>
+                  <div style="background-color: black"></div>
                   <form method="post" action="{% url 'logout' %}">
                     {% csrf_token %}
 
-                    <button class="btn" type="submit">Cerrar Sesión</button>
+                    <button
+                      class="btn mt-2"
+                      style="font-size: 2rem"
+                      type="submit"
+                    >
+                      Cerrar Sesión
+                    </button>
                   </form>
                 </div>
 
                 {% else %}
 
-                <a class="btn nav-link" href="{% url 'login'%}"
+                <a
+                  class="btn nav-link"
+                  style="font-size: 2rem"
+                  href="{% url 'login'%}"
                   >Iniciar Sesión</a
                 >
 
@@ -83,23 +140,99 @@
       </nav>
     </header>
 
-    <main>{% block contentViews %} {% endblock%}</main>
+    <main style="background-color: rgb(246, 245, 245); min-height: 60vh">
+      {% block contentViews %} {% endblock%}
+    </main>
 
-    <footer class="footer w-100 p-4">
-      <div class="d-flex justify-between alig-center bt-2">
-        <div class="d-flex flex-column">
+    <footer class="footer w-100 p-4" style="border-top: thin solid black">
+      <div class="w-100 d-flex justify-content-between align-content-center">
+        <h2 class="w-25 text-center p-3 cursor-pointer">
+          <a href="/app" class="text-black" style="text-decoration: none"
+            >Articles<span class="f-bold text-black" style="font-style: italic"
+              >Land</span
+            ></a
+          >
+        </h2>
+        <div class="d-flex flex-column w-50">
+          <a class="nav-link" href="{% url 'inicio'%}">All Articles</a>
           <a class="nav-link" href="{% url 'articles'%}">My Articles</a
           ><a class="nav-link" href="{% url 'add_article'%}">New Article</a
           ><a class="nav-link" href="{% url 'about'%}">About Me</a>
         </div>
+        <div
+          class="w-25 pt-2 d-flex justify-content-around align-content-center"
+        >
+          <a href="https://facebook.com" target="_blank" rel="noopener">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-brand-facebook"
+              width="35"
+              height="35"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#000000"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path
+                d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"
+              />
+            </svg>
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-brand-instagram"
+              width="35"
+              height="35"
+              viewBox="0 0 24 24"
+              stroke-width="1"
+              stroke="#000000"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <rect x="4" y="4" width="16" height="16" rx="4" />
+              <circle cx="12" cy="12" r="3" />
+              <line x1="16.5" y1="7.5" x2="16.5" y2="7.501" />
+            </svg>
+          </a>
+
+          <a href="https://web.whatsapp.com/" target="_blank" rel="noopener">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-brand-whatsapp"
+              width="35"
+              height="35"
+              viewBox="0 0 24 24"
+              stroke-width="1"
+              stroke="#000000"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
+              <path
+                d="M9 10a0.5 .5 0 0 0 1 0v-1a0.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a0.5 .5 0 0 0 0 -1h-1a0.5 .5 0 0 0 0 1"
+              />
+            </svg>
+          </a>
+        </div>
       </div>
-      <small class="w-100 text-center">All rigth reserves</small>
+
+      <div class="w-100 text-center">
+        <small> &copy; ArticleLand. All right reserved</small>
+      </div>
     </footer>
 
-    <!-- <script
+    <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
-    ></script> -->
+    ></script>
   </body>
 </html>

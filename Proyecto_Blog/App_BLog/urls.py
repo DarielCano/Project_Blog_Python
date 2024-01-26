@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path 
-from .views import index, login_req, register,articleForm, getArticles, aboutMe, avatar,profile, update_profile,ArticleDetails
+from .views import index, login_req, register,articleForm, getArticles, aboutMe, avatar,profile, update_profile,update_article,search,ArticleDetails
 from django.contrib.auth.views import LogoutView
 
 
@@ -15,5 +15,8 @@ urlpatterns = [
     path('avatar/', avatar, name='avatar'),
     path("profile/", profile, name="profile"),
     path("update/", update_profile, name="update_profile"),
+    path("update-article/<dato>", update_article, name="update_article"),
     path("logout/",LogoutView.as_view(template_name="logout.html" ), name="logout" ), 
+     path("search/",search,name="search"),
+   
     ]

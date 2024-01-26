@@ -1,0 +1,61 @@
+{%extends 'commonContent.html' %} {% load static %} {% block contentViews%}
+
+<div class="cards">
+  <h2 class="w-100 text-center p-4">Resultados de la búsqueda</h2>
+
+  {% if result%} {% for info in result%}
+  <div class="card mb-3 m-auto" style="max-width: 800px">
+    <div class="row g-0">
+      {% if info.image %}
+      <div class="col-md-4">
+        <img
+          src="{{info.image.url}}"
+          class="img-fluid rounded-start"
+          alt="{{info.title}}"
+        />
+      </div>
+      {% endif %}
+      <div class="col-md-8">
+        <div class="card-body">
+          <h2 class="card-title">{{info.title}}</h2>
+          <hr style="width: 100%" />
+          <h5>{{article.subtitle}}</h5>
+          <p class="card-text">{{info.description}}</p>
+          <p class="card-text">
+            <strong>Author:</strong> {{info.author.first_name}}
+            {{info.author.last_name}}
+          </p>
+          <p class="card-text">
+            Created_at:
+            <small class="text-body-secondary">{{info.create_at}}</small>
+          </p>
+
+          <div
+            class="d-flex w-25 justify-content-between align-items-center mb-5"
+          ></div>
+
+          <a
+            href="{% url 'article-detail' info.id %}"
+            class="card-text text-decoration-none"
+            style="font-size: 1.5rem"
+            >Details</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %} {%else%}
+  <p class="w-100 text-center" style="font-size: 1.5rem">
+    There are no matches😟
+  </p>
+
+  {% endif%}
+</div>
+
+<div class="w-100 d-flex justify-content-center align-items-center">
+  <a class="btn btn-dark pe-4 ps-4" href="/app/" style="font-size: 1.5rem"
+    >Back</a
+  >
+</div>
+
+{% endblock %}

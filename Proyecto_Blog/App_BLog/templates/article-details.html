@@ -1,18 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {% load static %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Article Details</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>Blog</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
   </head>
-
   <body>
-    <div class="container">
-      <p></p>
-      <div class="d-flex flex-colunm justify-center align center w-75 m-auto">
-        <h2>{{article.title}}</h2>
-        <div class="bg-black"><img src="{{article.image.url}}" alt="" /></div>
+    <div class="container p-5">
+      <div
+        class="d-flex flex-column justify-center align center w-100 text-center p-3"
+      >
+        <h2 class="text-center">{{article.title}}</h2>
+        {% if article.image %}
+        <div class="m-auto">
+          <img
+            class="img-fluid rounded-start"
+            src="{{article.image.url}}"
+            alt=""
+          />
+        </div>
         <div>
+          {% endif%}
           <div>
             <h3 class="pb-2">{{article.subtitle}}</h3>
             <p>
@@ -23,9 +39,13 @@
           </div>
           <h4>Created-at: {{article.create_at}}</h4>
         </div>
+        <a
+          href="{% url 'articles' %}"
+          class="btn btn-dark pe-5 ps-5 m-auto mt-5"
+          style="font-size: 1.5rem"
+          >Back</a
+        >
       </div>
     </div>
-
-    <a href="{% url 'articles' %}">Back</a>
   </body>
 </html>

@@ -1,19 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Edit Profile</title>
-  </head>
-  <body>
-    <h2>Editar usuario: <strong>{{usuario}}</strong></h2>
-    <form action="{% url 'update_profile' %}" method="post">
-      {% csrf_token %}
+{%extends 'commonContent.html' %} {% load static %} {% block contentViews%}
 
-      <table>
-        {{form.as_table}}
-      </table>
-      <input type="submit" value=" Guardar Cambios" />
-    </form>
-  </body>
-</html>
+<div class="p-4 d-flex flex-column justify-content-center align-items-center">
+  <h2 class="mb-5">Edit user: <strong>{{usuario}}</strong></h2>
+  <form action="{% url 'update_profile' %}" method="post">
+    {% csrf_token %}
+
+    <table>
+      {{form.as_table}}
+    </table>
+    <div class="d-flex justify-content-around align-items-center mt-3">
+      <input type="submit" value="Save Changes" class="btn btn-dark" />
+      <a class="btn btn-dark" href="/app/profile">Back</a>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

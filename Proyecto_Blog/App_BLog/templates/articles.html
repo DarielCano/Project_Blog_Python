@@ -2,39 +2,65 @@
 
 <div class="container">
   <div class="section">
-    <h2>My Articles</h2>
+    <h2 class="w-100 text-center p-4">My Articles</h2>
     <div class="cards">
       {% if articles %} {% for article in articles %}
-      <div class="card">
-        <h2>{{article.title}}</h2>
-        {%if article.image%}
-        <div class="bg-black"><img src="{{article.image.url}}" alt="" /></div>
-        {% endif%}
-        <div>
-          <h3>{{article.subtitle}}</h3>
 
-          <p>
-            Autor: {{article.author.first_name}} {{article.author.last_name}}
-          </p>
-          <p>Fecha de creación: {{article.create_at}}</p>
-
-          <div class="d-flex justify-between align-center">
-            <form method="POST" action="{% url 'articles' %} ">
-              {% csrf_token%}
-              <button
-                class="btn btn-danger"
-                name="article-id"
-                value="{{article.id}}"
-              >
-                Delete
-              </button>
-            </form>
+      <div class="card mb-3 m-auto" style="max-width: 800px">
+        <div class="row g-0">
+          {% if article.image %}
+          <div class="col-md-4">
+            <img
+              src="{{article.image.url}}"
+              class="img-fluid rounded-start"
+              alt="{{article.title}}"
+            />
           </div>
-          <a href="{% url 'article-detail' article.id %}">Details</a>
+          {% endif %}
+          <div class="col-md-8">
+            <div class="card-body">
+              <h2 class="card-title">{{article.title}}</h2>
+              <hr style="width: 100%;"/>
+              <h5>{{article.subtitle}}</h5>
+              <p class="card-text">{{article.description}}</p>
+              <p class="card-text">
+                <strong>Author:</strong> {{article.author.first_name}}
+                {{article.author.last_name}}
+              </p>
+              <p class="card-text">
+                Created_at:
+                <small class="text-body-secondary">{{article.create_at}}</small>
+              </p>
+
+              <div class="d-flex w-25 justify-content-between align-items-center mb-5">
+                <form method="POST" action="{% url 'articles' %} ">
+                  {% csrf_token%}
+                  <button
+                    class="btn btn-danger"
+                    name="article-id"
+                    value="{{article.id}}"
+                  >
+                    Delete
+                  </button>
+                </form>
+    
+                <a class="" href="{% url 'update_article' article.id %} ">
+                  {% csrf_token%}
+                  <button class="btn btn-info">Update</button>
+                </a>
+              </div>
+
+              <a href="{% url 'article-detail' article.id %}" class="card-text text-decoration-none " style="font-size: 1.5rem;"
+                >Details</a
+              >
+            </div>
+          </div>
         </div>
+      </div>
+      
 
         {% endfor %} {% else %}
-        <p>No hay información por mostrar aún 😟</p>
+        <p  class="w-100 text-center pt-4" style="font-size:1.5rem"> There are not articles yet 😟</p>
 
         {% endif %}
       </div>

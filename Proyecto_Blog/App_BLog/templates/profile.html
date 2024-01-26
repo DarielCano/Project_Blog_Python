@@ -2,15 +2,22 @@
 
 <div class="container">
   <div class="section">
-    <h2>Profile</h2>
-    <div class="container">
+    <div class="container text-center p-4">
+      <h2 class="p-2">Profile</h2>
       <div>
         {% if url %}
-        <img height="480px" src="{{url}}" alt="" />
+
+        <img
+          height="250px"
+          width="250px"
+          style="border-radius: 50%"
+          src="{{url}}"
+          alt=""
+        />
         {% else %}
         <img height="480px" src="../../media/avatars/avatar.webp" alt="" />
         {% endif %}
-        <h4>{{user.username}}</h4>
+        <h2 class="pt-4">{{user.username}}</h2>
       </div>
       <div>
         <p><strong>Name: </strong>{{user.first_name}}</p>
@@ -19,8 +26,24 @@
       </div>
 
       <div>
-        <button><a href="{% url 'update_profile' %}">Edit Profile</a></button>
-        <button><a href="{% url 'avatar' %}">Edit Avatar</a></button>
+        {% if user.username != "admin"%}
+        <button class="btn btn-info">
+          <a
+            class="text-white"
+            href="/app/update/"
+            style="font-size: 1.5rem; text-decoration: none"
+            >Edit Profile</a
+          >
+        </button>
+        {% endif%}
+        <button class="btn btn-info">
+          <a
+            class="text-white"
+            href="/app/avatar/"
+            style="font-size: 1.5rem; text-decoration: none"
+            >Edit Avatar</a
+          >
+        </button>
       </div>
     </div>
   </div>

@@ -1,38 +1,61 @@
 {%extends 'commonContent.html' %} {% load static %} {% block contentViews%}
 
-<div class="container">
-  <h1>All Published Articles</h1>
+<div class="container pt-3">
+  <h1 class="w-100 text-center mb-5">All Published Articles</h1>
+  <div class="cards">
+    
+      {% if all_articles %} 
+      <form  action="{% url 'search' %}" class="search w-25 d-flex justify-content-center align-items-center mb-5" method="get">
+        <select class="form-select w-50" name="select">
+          <option value="title">Title</option>
+          <option value="author" selected>Author</option>
+         </select>
+        <input class="form-control" type="text" name="search" id="search" placeholder="Search" />
+        <input  class="btn btn-dark ms-2" type="submit" value="Search" />
+      </form>
+      
+      {% for article in all_articles %}
 
-  {% if all_articles %} {% for article in all_articles %}
-  <div class="card">
-    <h2>{{article.title}}</h2>
-    {% if article.image%}
-    <div class="bg-black"><img src="{{article.image.url}}" alt="" /></div>
-    {% endif%}
-    <div>
-      <h4>{{article.subtitle}}</h4>
+      <div class="card mb-3 m-auto" style="max-width: 800px">
+        <div class="row g-0">
+          {% if article.image %}
+          <div class="col-md-4">
+            <img
+              src="{{article.image.url}}"
+              class="img-fluid rounded-start"
+              alt="{{article.title}}"
+            />
+          </div>
+          {% endif %}
+          <div class="col-md-8">
+            <div class="card-body">
+              <h2 class="card-title">{{article.title}}</h2>
+              <hr style="width: 100%;"/>
+              <h5>{{article.subtitle}}</h5>
+              <p class="card-text">{{article.description}}</p>
+              <p class="card-text">
+                <strong>Author:</strong> {{article.author.first_name}}
+                {{article.author.last_name}}
+              </p>
+              <p class="card-text">
+                Created_at:
+                <small class="text-body-secondary">{{article.create_at}}</small>
+              </p>
 
-      <p>
-        <strong>Author:</strong> {{article.author.first_name}}
-        {{article.author.last_name}}
-      </p>
-      <p><strong>Created_at:</strong> {{article.create_at}}</p>
+              <a href="{% url 'article-detail' article.id %}" class="card-text text-decoration-none" style="font-size: 1.5rem;"
+                >Details</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <a href="{% url 'article-detail' article.id %}">Details</a>
+      {% endfor %} {% else %}
+      <p class="w-100 text-center" style="font-size: 1.5rem;">There are not articles yet 😟</p>
+
+      {% endif %}
     </div>
-
-    {% endfor %} {% else %}
-    <p>No hay información por mostrar aún 😟</p>
-
-    {% endif %}
   </div>
-  <!--   {% if request.user.is_authenticated %}
-   <div class="text-center">
-    <img height="480px" src="{{url}}" />
-    <h1>Hola {{user.usersurname}}</h1>
-  </div> 
-
-  {% endif %} -->
 </div>
 
 {% endblock %}

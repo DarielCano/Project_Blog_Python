@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Article(models.Model):
-    title = models.CharField(max_length=60)
+    title = models.CharField(max_length=60, )
     subtitle= models.CharField(max_length=90)
     description = models.TextField(max_length=250)
     author= models.ForeignKey(User, on_delete=models.CASCADE, null = True)
