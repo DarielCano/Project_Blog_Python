@@ -1,18 +1,20 @@
 # PRESENTACION
 
 Proyecto Final de CoderHouse
-Tipo Blog con CRUD de articulos creados
+Tipo Blog con CRUD de artículos creados
+
+# ENLACE AL VIDEO
+https://youtu.be/J9Ej_RJXncw
 
 # INSTALACION
-
 - Clonar repositorio de GitHub.
 - Clonar entorno virtual v-env
 - Entrar al directorio de Proyecto_Blog
 - Ejecutar python manage.py runserver
-
                   |
 
 # DESCRIPCION
+Proyecto tipo blog con sistema de autenticación de usuarios, y operaciones CRUD con artículos, además de administración de perfiles
 
 ## AUTOR
 
