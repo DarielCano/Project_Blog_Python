@@ -37,8 +37,7 @@ def index(request):
 def login_req(request):
     if request.method =="POST":
         form = AuthenticationForm(request, data= request.POST)
-        
-        print(form)
+               
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
@@ -116,11 +115,10 @@ def articleForm(request):
     if request.method == "POST":
         form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
-            #article = form.save() 
+           
             article = Article(title=form.cleaned_data.get("title"), subtitle = form.cleaned_data.get("subtitle"), description = form.cleaned_data.get("description"), author = request.user,image = form.cleaned_data.get("image") )
             article.save()
-            #article.author = request.user
-            #article.save()
+         
            
             
             return redirect("/app")
@@ -257,13 +255,14 @@ def search(request):
             avatar = Avatar.objects.filter(user=request.user.id)
          
             if select == "title":
-               title = Article.objects.filter(title__icontains =search) 
+               title = Article.objects.filter(title__icontains = search) 
                return render(request,"search.html",{"result":title,"select":select})
             else:
                 articles = Article.objects.all()
                 author= []
+                search =search.lower()
                 for article in articles:
-                    if article.author.first_name == search or article.author.last_name == search or article.author.username == search:
+                    if article.author.first_name.lower() == search or article.author.last_name.lower() == search or article.author.username.lower() == search:
                         author.append(article)
                 if len(avatar)>0:
                     if len(avatar) == 1: 
